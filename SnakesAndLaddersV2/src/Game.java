@@ -5,7 +5,6 @@ public final class Game {
   private LinkedList<Player> players = new LinkedList<Player>();
   private Board board;
   private Player winner;
-  Square squares;
 
   private final class Die {
     private static final int MINVALUE = 1;
