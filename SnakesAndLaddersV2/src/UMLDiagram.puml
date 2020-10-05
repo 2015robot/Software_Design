@@ -1,0 +1,114 @@
+@startuml
+abstract class ISquare
+abstract class Square
+abstract class Game
+abstract class Main
+abstract class Die
+abstract class Player
+abstract class LastSquare
+abstract class Snake
+abstract class Ladder
+abstract class FirstSquare
+
+ISquare <|-- Square
+Game o--> ISquare
+Game <-- Main
+Game --> Die
+Game o--> Player
+Player <--> FirstSquare
+Player <--> ISquare
+
+class ISquare {
+--
++ isFirstSquare(): boolean
++ isLastSquare(): boolean
++ enter(Player)
++ leave(Player)
++ isOccupied(): boolean
++ getPosition(): int
++ moveAndLand(int): ISquare
++ IandHereOrGoHome(): ISquare
+
+}
+
+class Square {
+- {static} player: Player
+- {static} position: int
+- {static} game: Game
+--
++ getPlayer(): Player
++ isFirstSquare(): boolean
++ isLastSquare(): boolean
++ enter(Player)
++ leave(Player)
++ isOccupied(): boolean
+# findRelativeSquare(int): ISquare
++ moveAndLand(int): ISquare
+#findFirstSquare(): ISquare
++ landHereOrGoHome(): ISquare
++ getPosition(): int
++ getGame(): Game
++ Square(int, Game)
+}
+
+class Die{
+--
++ roll(): int
+}
+
+class Game{
+- {static} winner: Player
+--
+# createPlayers(String[])
+# createGame(int, int[][], int[][])
+# numberOfSquares(): int
++ Game(String[], int, int[[], int[])
++ FirstSquare(): ISquare
+~ currentPlayer(): Player
+# notOver(): boolean
+# movePlayer(int)
++ play()
++ findSquare(int): ISquare
++ toString(): String
++ finsLastSquare(): ISquare
+}
+
+class Player{
+- {static} name: string
+--
++ Player(String)
++ moveForward(int)
++ position(): int
++ toString(): String
++ wins(): boolean
+}
+
+class FirstSquare{
+--
++ FirstSquare(int, Game)
++ enter(Player)
++ isOccuped(): boolean
++ leave(Player)
+}
+
+class Ladder{
+# transport: int
+--
++ Ladder(int, Game, int)
+}
+
+class Snake{
+# transport: int
+--
++ Snake(int, Game, int)
+}
+
+class LastSquare{
+--
++ LastSquare(int, Game)
++ isLastSquare(): boolean
+}
+
+
+@enduml
+@enduml
