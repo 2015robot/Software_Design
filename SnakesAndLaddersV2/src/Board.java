@@ -55,7 +55,7 @@ import java . util . ArrayList ;
         System . out . println (" snake from " + ( fromPosition +1) + " to " + ( toPosition +1));
 
         Square snakeSquare = squares . get ( fromPosition );
-        snakeSquare . setSquareRole (new SnakeRole ( snakeSquare , transport ));
+        snakeSquare . setSquareRole (new SnakeLadderRoles ( snakeSquare , transport, "snake"));
       }
     }
 
@@ -74,7 +74,7 @@ import java . util . ArrayList ;
         System . out . println (" ladder from " + ( fromPosition +1) + " to " + ( toPosition +1));
 
         Square ladderSquare = squares . get ( fromPosition );
-        ladderSquare . setSquareRole ( new LadderRole ( ladderSquare , transport ));
+        ladderSquare . setSquareRole ( new SnakeLadderRoles( ladderSquare, transport, "ladder"));
       }
     }
 }

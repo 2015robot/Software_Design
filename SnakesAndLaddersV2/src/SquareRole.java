@@ -27,11 +27,7 @@ public abstract class SquareRole {
       System.out.println (" Should go to " + ( presentPosition + moves +1) + " beyond last square " + ( lastPosition +1) + " so let's reflect");
       int futurePosition = lastPosition - (presentPosition + moves - lastPosition);
       System.out.println(" Present posotion: " + (presentPosition + 1) + ", future position: " + (futurePosition + 1));
-      if (futurePosition >= presentPosition) {
-        moves = futurePosition - presentPosition;
-      } else {
-        moves = presentPosition - futurePosition;
-      }
+      moves = futurePosition - presentPosition;
       return square.findRelativeSquare(moves).landHereOrGoHome();
     } else {
       System . out . println (" move from " + ( square . getPosition ()+1) + " to " + ( square . findRelativeSquare ( moves ). getPosition ()+1));
