@@ -17,6 +17,10 @@ Game --> Die
 Game o--> Player
 Player <--> FirstSquare
 Player <--> ISquare
+Square <|-- FirstSquare
+Square <|-- Ladder
+Square <|-- Snake
+Square <|-- LastSquare
 
 class ISquare {
 --
@@ -24,7 +28,7 @@ class ISquare {
 + isLastSquare(): boolean
 + enter(Player)
 + leave(Player)
-+ isOccupied(): boolean
++ isOccuped(): boolean
 + getPosition(): int
 + moveAndLand(int): ISquare
 + IandHereOrGoHome(): ISquare
