@@ -5,8 +5,9 @@ public final class Main {
 
     int[][] snakesFromTo = {{11, 5}};
     int[][] laddersFromTo = {{2, 6}, {7, 9}};
+    int[] deathSquare = {3, 10};
 
-    Game game = new Game (playerNames, numSquares, snakesFromTo, laddersFromTo);
+    Game game = new Game (playerNames, numSquares, snakesFromTo, laddersFromTo, deathSquare);
     game.play ();
   }
 }

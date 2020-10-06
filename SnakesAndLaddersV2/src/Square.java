@@ -18,7 +18,7 @@ public class Square {
     player = p ;
   }
 
-  public int getPosition () {
+  public int getPosition() {
     return position ;
   }
 
@@ -62,4 +62,6 @@ public class Square {
   public Square findLastSquare () {
     return board . lastSquare ();
   }
+
+  public boolean isDeath() {return squareRole.isDeath();}
 }

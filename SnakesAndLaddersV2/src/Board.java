@@ -4,15 +4,24 @@ import java . util . ArrayList ;
     private ArrayList < Square > squares = new ArrayList < Square >();
     private static int MINNUMSQUARES = 10;
 
-    public Board ( int numSquares , int [][] ladders , int [][] snakes ) {
-      assert numSquares > MINNUMSQUARES : " There must be at least " + MINNUMSQUARES + " squares ";
+    public Board ( int numSquares , int [][] ladders , int [][] snakes, int[] death) {
+      assert numSquares > MINNUMSQUARES : "There must be at least " + MINNUMSQUARES + " squares ";
       makeSquares ( numSquares );
       makeLadders ( ladders );
       makeSnakes ( snakes );
+      makeDeath(death);
+    }
+
+    private void makeDeath(int[] death) {
+      for (int i = 0; i < death.length ; i ++) {
+        System.out.println("There is a death square at " + (death[i] + 1));
+        Square deathSquare = squares.get(death[i]);
+        deathSquare.setSquareRole(new DeathRole(deathSquare));
+      }
     }
 
     private void makeSquares (int numSquares ) {
-      System . out . println (" There are " + numSquares + " squares ");
+      System . out . println ("There are " + numSquares + " squares ");
       for (int position =0 ; position < numSquares ; position ++) {
         Square square = new Square ( position , this );
         squares . add ( square );
@@ -31,8 +40,8 @@ import java . util . ArrayList ;
     }
 
     public Square findSquare ( int position ) {
-      assert ( position >0) && ( position < numberOfSquares ()) : " inexistent square ";
-      return squares . get ( position );
+      assert ( position >0) && ( position < numberOfSquares ()) : "inexistent square ";
+      return squares.get (position);
     }
 
     private int numberOfSquares () {
@@ -52,7 +61,7 @@ import java . util . ArrayList ;
         assert ( toPosition > 0) && ( toPosition < numberOfSquares () -1);
         assert ( fromPosition < numberOfSquares () -1) && ( fromPosition >0);
 
-        System . out . println (" snake from " + ( fromPosition +1) + " to " + ( toPosition +1));
+        System . out . println ("snake from " + ( fromPosition +1) + " to " + ( toPosition +1));
 
         Square snakeSquare = squares . get ( fromPosition );
         snakeSquare . setSquareRole (new SnakeLadderRoles ( snakeSquare , transport, "snake"));
@@ -71,7 +80,7 @@ import java . util . ArrayList ;
         assert ( toPosition < numberOfSquares ()) && ( toPosition > 0);
         assert ( fromPosition > 0) && ( fromPosition < numberOfSquares ());
 
-        System . out . println (" ladder from " + ( fromPosition +1) + " to " + ( toPosition +1));
+        System . out . println ("ladder from " + ( fromPosition +1) + " to " + ( toPosition +1));
 
         Square ladderSquare = squares . get ( fromPosition );
         ladderSquare . setSquareRole ( new SnakeLadderRoles( ladderSquare, transport, "ladder"));

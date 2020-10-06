@@ -15,9 +15,9 @@ public final class SnakeLadderRoles extends SquareRole {
 
   @Override public Square landHereOrGoHome () {
     if (role.equals("snake")) {
-      System.out.println(" snake from " + (square.getPosition() + 1) + " to " + (destination().getPosition() + 1));
+      System.out.println("snake from " + (square.getPosition() + 1) + " to " + (destination().getPosition() + 1));
     } else {
-      System.out.println(" ladder from " + (square.getPosition ()+1) + " to " + (destination().getPosition()+1));
+      System.out.println("ladder from " + (square.getPosition ()+1) + " to " + (destination().getPosition()+1));
     }
     return destination().landHereOrGoHome();
   }

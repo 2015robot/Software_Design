@@ -1,6 +1,7 @@
 public final class Player {
   private Square square = null ;
   private String name ;
+  private boolean dead = false;
 
     public Square getSquare () {
       return square ;
@@ -35,6 +36,12 @@ public final class Player {
      assert moves >0 : "non - positive moves ";
      square . leave ( this );
      square = square . moveAndLand ( moves );
-     square . enter ( this );
+     if (square.isDeath()) {
+       this.dead = true;
+     } else {
+       square.enter(this);
+     }
     }
+
+    public boolean getPlayerStatus() {return dead;}
 }

@@ -23,18 +23,23 @@ public final class Game {
   private void movePlayer (int roll ) {
     Player currentPlayer = players . remove (); // from the head
     currentPlayer . moveForward ( roll );
-    players . add ( currentPlayer ); // to the tail
-    if ( currentPlayer . wins ()) {
-      winner = currentPlayer ;
+    if (!currentPlayer.getPlayerStatus()) {
+      players.add(currentPlayer); // to the tail
+      if (currentPlayer.wins()) {
+        winner = currentPlayer;
+      }
+    } else {
+      System.out.println(" player " + currentPlayer.getName() + " is dead");
     }
   }
-  public Game ( String [] playerNames , int numSquares , int [][] snakes , int [][] ladders ) {
-    makeBoard(numSquares, ladders, snakes);
+
+  public Game ( String [] playerNames , int numSquares , int [][] snakes , int [][] ladders, int[] death) {
+    makeBoard(numSquares, ladders, snakes, death);
     makePlayers(playerNames);
   }
 
-  private void makeBoard (int numSquares , int [][] ladders , int [][] snakes ) {
-    board = new Board ( numSquares , ladders , snakes );
+  private void makeBoard (int numSquares , int [][] ladders , int [][] snakes, int[] death) {
+    board = new Board ( numSquares , ladders , snakes, death);
     }
 
     private void makePlayers ( String [] playerNames ) {
@@ -56,14 +61,18 @@ public final class Game {
       Die die = new Die ();
       startGame ();
 
-      System . out . println (" Initial state : \n" + this );
+      System . out . println ("Initial state : \n" + this );
       while (notOver()) {
         int roll = die.roll();
-        System . out . println (" Current player is " + currentPlayer () + " and rolls " + roll );
+        System . out . println ("Current player is " + currentPlayer () + " and rolls " + roll );
         movePlayer(roll);
-        System . out . println (" State : \n" + this );
+        System . out . println ("State : \n" + this );
       }
-      System . out . println ( winner + " has won.");
+      if (allDead()) {
+        System.out.println("All the players are dead");
+      } else {
+        System.out.println(winner + " has won.");
+      }
     }
 
     private void startGame () {
@@ -78,7 +87,7 @@ public final class Game {
     }
 
     private boolean notOver () {
-      return winner == null ;
+      return (winner == null && !allDead()) ;
     }
 
     @Override
@@ -93,5 +102,9 @@ public final class Game {
     Player currentPlayer () {
      assert players . size () >0;
      return players . peek ();
+    }
+
+    boolean allDead() {
+      return players.isEmpty();
     }
 }
