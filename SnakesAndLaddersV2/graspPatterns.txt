@@ -1,0 +1,4 @@
+Expert: Podem veure com cada classe te informació d'allò que necessita, Board te tota la informació del taulell i crea les diferents caselles, SquareRole conté la informació de quin tipus de casella es tracta i quina funció tenen, etc.
+Creator: La classe Game crea un objecte Board que conté tota la informació del taulell, la classe Board crea objectes Square que seran les caselles, podem veure que cada classe crea allò que s'espera que han de crear.
+Low coupling: Al acomplirse els dos darrers patrons és molt fàcil que aquest també ho faci, totes les classes respeten les tasques que han de fer, no fan coses que no haurien de fer, no hi ha lligams entre classes innecessaris.
+Polymorphism: Podem veure com SquareRole fa de superclasse sobre els diferents tipus de caselles, conté les funcions i atributs comuns i aquella subclasse que ho necessiti sobreescribeis aquelles funcions que necessita complementar amb funcionalitats extres.
