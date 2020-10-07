@@ -1,39 +1,68 @@
 @startuml
-abstract class ISquare
 abstract class Square
 abstract class Game
 abstract class Main
 abstract class Die
 abstract class Player
-abstract class LastSquare
-abstract class Snake
-abstract class Ladder
-abstract class FirstSquare
+abstract class LastSquareRole
+abstract class SnakeRole
+abstract class LadderRole
+abstract class FirstSquareRole
+abstract class Board
+abstract class SquareRole
+abstract class RegularSquareRole
 
-ISquare <|-- Square
-Game o--> ISquare
+
+
+SquareRole <|-- RegularSquareRole
 Game <-- Main
-Game --> Die
+Game <--> Die
 Game o--> Player
-Player <--> FirstSquare
-Player <--> ISquare
-Square <|-- FirstSquare
-Square <|-- Ladder
-Square <|-- Snake
-Square <|-- LastSquare
+Player <--> Square
+SquareRole <|-- FirstSquareRole
+SquareRole <|-- LadderRole
+SquareRole <|-- SnakeRole
+SquareRole <|-- LastSquareRole
+Square <--> SquareRole
+Board o-->Square
+Game o--> Board
+FirstSquareRole o--> Player
 
-class ISquare {
---
-+ isFirstSquare(): boolean
-+ isLastSquare(): boolean
-+ enter(Player)
-+ leave(Player)
-+ isOccuped(): boolean
-+ getPosition(): int
-+ moveAndLand(int): ISquare
-+ IandHereOrGoHome(): ISquare
-
+class RegularSquareRole{
++ RegularSquareRole ( Square s )
 }
+
+
+class Main{
+--
++ main(String[] args)
+}
+
+class SquareRole {
+--
++ SquareRole ( Square s )
++ boolean isOccupied ()
++ boolean isFirstSquare ()
++ boolean isLastSquare ()
++ Square moveAndLand ( int moves )
++ Square landHereOrGoHome ()
++ void enter ( Player player )
++ void leave ( Player player )
++ boolean isDeath()
+}
+
+class Board {
++ Board ( int numSquares , int [][] ladders , int [][] snakes, int[] death)
++ void makeDeath(int[] death)
++ void makeSquares (int numSquares )
++ Square firstSquare ()
++ Square lastSquare ()
++ int numberOfSquares ()
++ void makeSnakes (int [][] snakes )
++ void makeLadders (int [][] ladders )
+}
+
+
 
 class Square {
 - {static} player: Player
@@ -87,32 +116,32 @@ class Player{
 + wins(): boolean
 }
 
-class FirstSquare{
+class FirstSquareRole{
 --
-+ FirstSquare(int, Game)
-+ enter(Player)
-+ isOccuped(): boolean
-+ leave(Player)
++ FirstSquareRole ( Square s )
++ @Override public boolean isFirstSquare ()
++ @Override public void enter ( Player player )
++ @Override public void leave ( Player player )
++ @Override public boolean isOccupied ()
 }
 
-class Ladder{
+class LadderRole{
 # transport: int
 --
 + Ladder(int, Game, int)
 }
 
-class Snake{
+class SnakeRole{
 # transport: int
 --
 + Snake(int, Game, int)
 }
 
-class LastSquare{
+class LastSquareRole{
 --
 + LastSquare(int, Game)
 + isLastSquare(): boolean
 }
 
 
-@enduml
 @enduml
