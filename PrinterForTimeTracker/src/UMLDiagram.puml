@@ -22,9 +22,10 @@ Task o--> Interval
 Interval ..> Observer
 Observer <.. Client
 Clock --> Observable
-Client <--> Project
-Client <-- Printer
-Project <-- PrinterVisitor
+Client --> Project
+Project <-- Printer
+Client --> PrinterVisitor
+Activity --|> PrinterVisitor
 
 
 
