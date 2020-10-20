@@ -31,16 +31,16 @@ public class Client implements Observer {
     c.addObserver(this);
     c.start();
 
-    Project root = new Project("root");
+    Project root = new Project("root");  //proyecto raiz
     Project p1 = new Project("P1");
-    root.addActivity(p1);
-    Project p2 = new Project("P2");
+    root.addActivity(p1);                     //creamos y añadimos el primer proyecto a la raiz como actividad
+    Project p2 = new Project("P2");     //creamos y añadimos el segundo proyecto a la raiz como actividad
     root.addActivity(p2);
-    Task t1 = new Task("T1");
+    Task t1 = new Task("T1");           //creamos y añadimos tascas a las actividades creadas
     root.addActivity(t1);
-    Task t2 = new Task("T2");
+    Task t2 = new Task("T2");           //creamos y añadimos tascas a las actividades creadas
     p1.addActivity(t2);
-    Task t3 = new Task("T3");
+    Task t3 = new Task("T3");           //creamos y añadimos tascas a las actividades creadas
     p2.addActivity(t3);
 
     // fer l'objecte impressor
