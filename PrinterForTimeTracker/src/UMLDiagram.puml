@@ -1,0 +1,134 @@
+@startuml
+
+
+abstract class Clock
+abstract class Observable
+abstract class Activity
+abstract class Interval
+abstract class Observer
+abstract class Task
+abstract class Project
+abstract class Client
+abstract class PrinterVisitor
+abstract class Printer
+
+
+
+Activity --> Activity
+Activity <--o Project
+Activity <|-- Project
+Activity <|-- Task
+Task o--> Interval
+Interval ..> Observer
+Observer <.. Client
+Clock --> Observable
+Client <--> Project
+Client <-- Printer
+Project <-- PrinterVisitor
+
+
+
+class Clock {
+- {static} Timer timer
+- {static} LocalDateTime date
+- {static} Clock clock
+--
+- Clock()
++ LocalDateTime getDate()
++ start()
++ cancel()
++ getInstance()
+}
+
+class Activity{
+- {static} String[] tags
+- {static} String name;
+- {static} Duration duration;
+- {static} father;
+- {static} LocalDateTime initialDate
+- {static} LocalDateTime finalDate
+--
++ Activity(String name)
++ Activity(String name, LocalDateTime initialDate, LocalDateTime finalDate, Duration duration)
++ addFather(Activity a)
++ getFather()
++ LocalDateTime getInitialDate()
++ LocalDateTime getFinalDate()
++ setInitialDate(LocalDateTime initialDate)
++ addDuration(Duration duration)
++ getDuration()
++ getName()
++ String toString()
+}
+
+class Interval{
+- {static} Duration duration;
+- {static} Task father;
+- {static} LocalDateTime initialDate;
+- static} LocalDateTime finalDate;
+--
++ Interval(Task father)
++ Interval(LocalDateTime initialDate, LocalDateTime finalDate, Duration duration)
++ update(Observable o, Object ob)
++ LocalDateTime getInitialDate()
++ LocalDateTime getFinalDate()
++ Duration getDuration()
++ String toString()
++ acceptVisitor(PrinterVisitor v)
++ setFather(Task t)
++ getFather()
+}
+
+class Task{
+- {static} List<Interval> intervals
+- {static} boolean status
+--
++ Task(String name)
++ Task(String name, LocalDateTime initialDate, LocalDateTime finalDate, Duration duration)
++ getStatus()
++ setStatus(boolean status)
++ startTask()
++ stopTask()
++ List<Interval> getIntervals()
++ String toString()
++ acceptVisitor(PrinterVisitor v)
++ addInterval(Interval interval)
++ Activity find(String name)
+}
+
+class Project{
+- {static} List<Activity> childs
+--
++ Project(String name)
++ Project(String name, LocalDateTime initialDate, LocalDateTime finalDate, Duration duration)
++ acceptVisitor(Visitor v)
++ addActivity(Activity a)
++ removeActivity(Activity a)
++ List<Activity> getChilds()
++ Activity find(String name)
+}
+
+
+class Client{
+--
++ update(Observable o, Object arg)
++ wait(int seconds)
++ start()
++ main(String[] args)
+}
+
+class Printer{
+- {static} Activity a
+--
++ Printer(Activity act)
++ printTree()
+}
+
+class PrinterVisitor{
+--
++ visitTask(Task t)
++ visitProject(Project p)
++ visitInterval(Interval i)
+}
+
+@enduml
