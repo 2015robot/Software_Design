@@ -1,0 +1,5 @@
+Per fer aquest exercici hem agafat el codi de la pràctica i hem afegit dues classes més, Printer i PrinterVisitor.
+La classe print és amb la qual interaccionem quan volem printar l'arbre de activitats.
+A la funció Start() de Client creem un instància de la classe Printer, que guardem en un atribut private del classe Client.
+A la funció update, cridarem a la funció PrintTree de la instància de Printer, perquè s'imprimeixi l'arbre cada 2 segons.
+La classe PrinterVisitor és la que implementa el patró visitor, que ens permet recòrrer l'arbre sense importar el tipus d'activitat que estem tractant per poder imprimir-la.
